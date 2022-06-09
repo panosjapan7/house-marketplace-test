@@ -68,10 +68,9 @@ function CreateListing() {
 
   const onSubmit =  async (e) => {
     e.preventDefault()
-
     setLoading(true)
 
-    if (discountedPrice >= regularPrice) {
+    if (+discountedPrice >= +regularPrice) {
       setLoading(false)
       toast.error('Discounted price needs to be less than regular price')
       return
@@ -101,8 +100,8 @@ function CreateListing() {
       }
     }
     else {
-      geolocation.lat = latitude
-      geolocation.lng = longitude
+      geolocation.lat = parseFloat(latitude)
+      geolocation.lng = parseFloat(longitude)
     }
 
     // Store image in firebase
@@ -155,6 +154,10 @@ function CreateListing() {
 
     const formDataCopy = {
       ...formData,
+      bedrooms: parseInt(bedrooms),
+      bathrooms: parseInt(bathrooms),
+      discountedPrice: parseInt(discountedPrice),
+      regularPrice: parseInt(regularPrice),
       imgUrls,
       geolocation,
       timestamp: serverTimestamp(),
