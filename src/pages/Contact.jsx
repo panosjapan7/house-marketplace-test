@@ -49,6 +49,10 @@ function Contact() {
               <label className="messageLabel" htmlFor="message">Message</label>
               <textarea name="message" id="message" className="textarea" value={message} onChange={onChange}></textarea>
             </div>
+
+            <a href={`mailto:${landlord.email}?Subject=${searchParams.get("listingName")}&body=${message}`}>
+              <button type="button" className="primaryButton">Send Message</button>
+            </a>
           </form>
         </main>
       )}
